@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Card } from './shared/components/card/card';
+import { ListaCorsi } from './features/catalogo-corsi/pages/lista-corsi/lista-corsi';
 
 @Component({
   selector: 'app-root',
-  imports: [Card],
+  imports: [ListaCorsi],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
