@@ -1,14 +1,14 @@
 <div class="container mt-4">
-  <h1 class="m-4">{{ titolo }}</h1>
+  <h1 class="m-4 text-center ">{{ titolo }}</h1>
   <div class="row g-3">
     <div class="col-md-4">
-      <app-card titolo="Elemento 1" descrizione="Descrizione primo elemento." />
+      <app-card [image]= "urlJava" titolo="Elemento 2" descrizione="Corso Java, dalle basi ai concetti avanzati (Livello Basso)."/>
     </div>
     <div class="col-md-4">
-      <app-card titolo="Elemento 2" descrizione="Descrizione secondo elemento." />
+      <app-card [image]="urlPython" titolo="Corso Python" descrizione="Corso Python Avanzato per Professionisti (Livello Avanzato, richiesta esperienza)." />
     </div>
     <div class="col-md-4">
-      <app-card titolo="Elemento 3" descrizione="Descrizione terzo elemento." />
+      <app-card [image]="urlSigil" titolo="Sigil" descrizione="Corso per ottenere qualsiasi cosa materiale (Livello Avanzato)" />
     </div>
   </div>
 </div>
