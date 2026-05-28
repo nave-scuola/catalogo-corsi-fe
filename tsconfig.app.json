@@ -8,7 +8,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/shared/components/dynamic-card/card-model-components/card-corso-rto"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

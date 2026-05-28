@@ -1,0 +1,16 @@
+<div class="card p-3 bg-black text-light text-opacity-75 border-2 border-info border-opacity-25"
+    style="max-width: 400px;">
+    <h3>{{ data.nome }} {{ data.cognome }}</h3>
+
+    <div class="card-text py-3 bg-info bg-opacity-25 m-2 p-3">
+        <h4 class="font-monospace text-center">Corsi</h4>
+        <ul>
+            @for (c of data.corsi; track $index) {
+            <li>
+                {{ c.titolo }} ({{ c.livello }})
+            </li>
+            }
+        </ul>
+    </div>
+
+</div>

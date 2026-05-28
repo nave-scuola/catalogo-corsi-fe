@@ -1,14 +1,11 @@
 <div class="container mt-4">
-  <h1 class="m-4">{{ titolo }}</h1>
+  <h1 class="m-4 text-center text-info text-opacity-75">{{ titolo }}</h1>
   <div class="row g-3">
-    <div class="col-md-4">
-      <app-card titolo="Elemento 1" descrizione="Descrizione primo elemento." />
-    </div>
-    <div class="col-md-4">
-      <app-card titolo="Elemento 2" descrizione="Descrizione secondo elemento." />
-    </div>
-    <div class="col-md-4">
-      <app-card titolo="Elemento 3" descrizione="Descrizione terzo elemento." />
-    </div>
+    @for (l of listaCards; track $index) {
+      <div class="col-md-4">
+        <app-dynamic-card-container [data]='l'></app-dynamic-card-container>
+      </div>
+    }
+    <app-dynamic-card-container [data]='corso'></app-dynamic-card-container>
   </div>
 </div>
