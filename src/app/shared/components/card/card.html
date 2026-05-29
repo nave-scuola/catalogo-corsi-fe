@@ -1,13 +1,6 @@
 <div class="card h-100">
-  @if (image()) {
-    <div class="card-img-top ratio ratio-4x3 d-flex justify-content-center align-items-center bg-light">
-        <img [src]="image()" [alt]="titolo()" class="">
-    </div>
-  }
   <div class="card-body">
-    <div class="position-relative bottom-">
-      <h5 class="card-title text-xxl-center fw-bolder font-monospace">{{ titolo() }}</h5>
-      <p class="card-text py-5 bg-info bg-opacity-25 m-2 p-3">{{ descrizione() }}</p>
-    </div>
+    <h5 class="card-title text-center font-monospace">{{ titolo() }}</h5>
+    <p class="card-text bg-info bg-opacity-25 m-2 p-3 flex-grow-1">{{ descrizione() }}</p>
   </div>
 </div>

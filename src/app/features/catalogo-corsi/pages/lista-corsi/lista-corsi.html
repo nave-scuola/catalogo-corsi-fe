@@ -5,9 +5,9 @@
     (input)="filtroTesto.set($any($event.target).value)" 
     class="form-control mb-3 border-2 border-info border-opacity-50 bg-black text-light" />
 
-  <div class="row g-3">
+  <div class="row g-4">
     @for (card of listaCardsFiltrati(); track $index) {
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-6 col-lg-4">
       <app-dynamic-card-container [data]="card"></app-dynamic-card-container>
     </div>
     }
