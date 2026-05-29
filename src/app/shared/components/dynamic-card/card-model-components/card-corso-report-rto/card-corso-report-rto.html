@@ -1,0 +1,14 @@
+<div class="card p-3 bg-black text-light text-opacity-75 border-2 border-info border-opacity-25"
+    style="max-width: 400px;">
+    <h3>{{ data().titolo }}</h3>
+
+    <div class="card-text py-3 bg-info bg-opacity-25 m-2 p-3">
+        <h4>Iscrizioni</h4>
+        <p>Attive: {{ data().iscrizioni.iscrizioniAttive }}</p>
+
+        <h4>Valutazioni</h4>
+        <p>Media voto: {{ data().valutazioni.mediaVoto }}</p>
+        <p>Numero valutazioni: {{ data().valutazioni.numeroValutazioni }}</p>
+    </div>
+
+</div>
