@@ -7,7 +7,7 @@
 
   <div class="row g-4">
     @for (card of listaCardsFiltrati(); track $index) {
-    <div class="col-md-4 col-sm-6 col-lg-4">
+    <div class="col-md-6 col-sm-6 col-lg-4">
       <app-dynamic-card-container [data]="card"></app-dynamic-card-container>
     </div>
     }

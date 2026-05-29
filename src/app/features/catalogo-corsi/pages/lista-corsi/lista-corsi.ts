@@ -45,6 +45,4 @@ export class ListaCorsi {
       payload: corso
     }))
   );
-
-
 }
