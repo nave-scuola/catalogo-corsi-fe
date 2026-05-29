@@ -1,12 +1,12 @@
 <div class="card p-3 bg-black text-light text-opacity-75 border-2 border-info border-opacity-25"
 style="max-width: 400px;">
-  <h3 class="font-monospace text-center">**{{ data.titolo }}**</h3>
-  <p>{{ data.descrizione }} - {{data.codiceCorso}}</p>
+  <h3 class="font-monospace text-center">**{{ data().titolo }}**</h3>
+  <p>{{ data().descrizione }} - {{data().codiceCorso}}</p>
   <div class="card-text py-3 bg-info bg-opacity-25 m-2 p-3">
-    <span>Livello: {{ data.livello }}</span>
+    <span>Livello: {{ data().livello }}</span>
     <br>
-    <span>Durata: {{ data.durataOre }} ore</span>
+    <span>Durata: {{ data().durataOre }} ore</span>
     <br>
-    <span>Descrizione: {{data.descrizione}}</span>
+    <span>Descrizione: {{data().descrizione}}</span>
   </div>
 </div>

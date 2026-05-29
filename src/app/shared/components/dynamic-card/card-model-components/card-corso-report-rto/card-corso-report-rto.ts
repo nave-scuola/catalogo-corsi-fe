@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CorsoReportRTO } from '../../../../../features/catalogo-corsi/models/rto/corsoReportRTO.model';
 
 @Component({
@@ -7,5 +7,5 @@ import { CorsoReportRTO } from '../../../../../features/catalogo-corsi/models/rt
   templateUrl: './card-corso-report-rto.html'
 })
 export class CardCorsoReportComponent {
-  @Input() data!: CorsoReportRTO;
+  data= input.required<CorsoReportRTO>();
 }

@@ -1,6 +1,6 @@
 import {
   Component,
-  Input,
+  input,
   ViewChild,
   ViewContainerRef,
   OnChanges
@@ -14,7 +14,7 @@ import { DynamicCardRequest } from '../../../../features/catalogo-corsi/models/r
   templateUrl: './dynamic-card-container.component.html'
 })
 export class DynamicCardContainerComponent implements OnChanges {
-  @Input() data!: DynamicCardRequest;
+  data= input.required<DynamicCardRequest>();
 
   @ViewChild('vc', { read: ViewContainerRef, static: true })
   vc!: ViewContainerRef;
@@ -26,13 +26,13 @@ export class DynamicCardContainerComponent implements OnChanges {
   private loadCard() {
     this.vc.clear();
 
-    const comp = CARD_REGISTRY[this.data.tipo];
+    const comp = CARD_REGISTRY[this.data().tipo];
     if (!comp) {
-      console.error('Tipo card non supportato:', this.data.tipo);
+      console.error('Tipo card non supportato:', this.data().tipo);
       return;
     }
 
     const componentRef = this.vc.createComponent(comp);
-    componentRef.setInput('data', this.data.payload);
+    componentRef.setInput('data', this.data().payload);
   }
 }
