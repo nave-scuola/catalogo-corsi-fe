@@ -12,7 +12,7 @@ export class CorsoStore {
   ];
 
   //filtro applicato al titolo, descrizione e categoria nello stesso form
-  filtroTesto= signal('');
+  filtroTesto= signal<string>('');
 
   corsiFiltrati = computed(() => {
     const filtro = this.filtroTesto().toLowerCase();
