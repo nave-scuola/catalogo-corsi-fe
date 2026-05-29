@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { DynamicCardRequest } from '../../models/rto/dynamic-card-request';
 import { CorsoRTO } from '../../models/rto/corsoRTO.model';
 import { DynamicCardContainerComponent } from '../../../../shared/components/dynamic-card/dynamic-card-container/dynamic-card-container.component';
@@ -11,6 +11,7 @@ import { DynamicCardContainerComponent } from '../../../../shared/components/dyn
 })
 
 export class ListaCorsi {
+  filtroTesto = signal('');
   titolo = 'Catalogo Corsi';
 
   //esempio di lista di card dinamiche:
@@ -25,5 +26,25 @@ export class ListaCorsi {
   }));
 
   //esempio di card dinamica:
-  corso: DynamicCardRequest = { tipo: 'corso', payload: {idCorso: 1, titolo: 'Java', codiceCorso: 'JAVA', livello: 'Basso', descrizione: 'Corso Base di Java', durataOre: 900, categoria: 'Dev' }};
+  corso: DynamicCardRequest = { tipo: 'corso', payload: { idCorso: 1, titolo: 'Java', codiceCorso: 'JAVA', livello: 'Basso', descrizione: 'Corso Base di Java', durataOre: 900, categoria: 'Dev' } };
+
+  corsiFiltrati = computed(() => {
+    const filtro = this.filtroTesto().toLowerCase();
+    if (!filtro) return this.corsi;
+
+    return this.corsi.filter(c =>
+      c.titolo.toLowerCase().includes(filtro) ||
+      c.descrizione.toLowerCase().includes(filtro) ||
+      c.categoria.toLowerCase().includes(filtro)
+    );
+  });
+
+  listaCardsFiltrati = computed(() =>
+    this.corsiFiltrati().map(corso => ({
+      tipo: 'corso' as const,
+      payload: corso
+    }))
+  );
+
+
 }
