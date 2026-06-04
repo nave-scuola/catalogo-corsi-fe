@@ -2,7 +2,7 @@ import { Injectable, computed, signal } from '@angular/core';
 import { CorsoRTO } from '../models/rto/corsoRTO.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CorsoStore {
   corsi: CorsoRTO[] = [
@@ -12,7 +12,7 @@ export class CorsoStore {
   ];
 
   //filtro applicato al titolo, descrizione e categoria nello stesso form
-  filtroTesto= signal<string>('');
+  filtroTesto = signal<string>('');
 
   corsiFiltrati = computed(() => {
     const filtro = this.filtroTesto().toLowerCase();
@@ -32,7 +32,8 @@ export class CorsoStore {
     }))
   );
 
-  getById(id: number): CorsoRTO | undefined {
-    return this.corsi.find(item => item.idCorso === id);
+  getById(id: number | string): CorsoRTO | undefined {
+    const idNum = Number(id);
+    return this.corsi.find(item => item.idCorso === idNum);
   }
 }
