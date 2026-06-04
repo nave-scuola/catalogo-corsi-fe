@@ -1,0 +1,4 @@
+input::placeholder {
+  color: grey;
+  opacity: 1; /* evita che i browser lo rendano grigio */
+}

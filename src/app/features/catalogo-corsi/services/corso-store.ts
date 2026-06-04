@@ -12,18 +12,7 @@ export class CorsoStore {
   ];
 
   //filtro applicato al titolo, descrizione e categoria nello stesso form
-  filtroTesto= signal<string>('');
-
-  corsiFiltrati = computed(() => {
-    const filtro = this.filtroTesto().toLowerCase();
-    if (!filtro) return this.corsi;
-
-    return this.corsi.filter(c =>
-      c.titolo.toLowerCase().includes(filtro) ||
-      c.descrizione.toLowerCase().includes(filtro) ||
-      c.categoria.toLowerCase().includes(filtro)
-    );
-  });
+  filtroTesto = signal<string>('');
 
   listaCardsFiltrati = computed(() =>
     this.corsiFiltrati().map(corso => ({
@@ -31,6 +20,57 @@ export class CorsoStore {
       payload: corso
     }))
   );
+
+  filtroAvanzato = signal<{
+    categoria: string;
+    livello: string;
+    titolo: string;
+    codiceCorso: string;
+  }>({
+    categoria: '',
+    livello: '',
+    titolo: '',
+    codiceCorso: ''
+  });
+
+  applicaFiltroAvanzato(filtro: {
+    categoria: string;
+    livello: string;
+    titolo: string;
+    codiceCorso: string;
+  }): void {
+    this.filtroAvanzato.set(filtro);
+  }
+
+  corsiFiltrati = computed(() => {
+    const testo = this.filtroTesto().toLowerCase();
+    const f = this.filtroAvanzato();
+
+    return this.corsi.filter(corso => {
+
+      // filtro testuale (titolo, descrizione, categoria)
+      const matchTesto =
+        !testo ||
+        corso.titolo.toLowerCase().includes(testo) ||
+        corso.descrizione.toLowerCase().includes(testo) ||
+        corso.categoria.toLowerCase().includes(testo);
+
+      // filtro avanzato
+      const matchCategoria =
+        !f.categoria || corso.categoria.toLowerCase().includes(f.categoria.toLowerCase());
+
+      const matchLivello =
+        !f.livello || corso.livello.toLowerCase().includes(f.livello.toLowerCase());
+
+      const matchTitolo =
+        !f.titolo || corso.titolo.toLowerCase().includes(f.titolo.toLowerCase());
+
+      const matchCodice =
+        !f.codiceCorso || corso.codiceCorso.toLowerCase().includes(f.codiceCorso.toLowerCase());
+
+      return matchTesto && matchCategoria && matchLivello && matchTitolo && matchCodice;
+    });
+  });
 
   getById(id: number): CorsoRTO | undefined {
     return this.corsi.find(item => item.idCorso === id);
