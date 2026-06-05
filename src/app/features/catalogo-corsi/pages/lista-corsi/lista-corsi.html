@@ -3,7 +3,7 @@
 
   <input type="text" placeholder="Filtra corsi tramite titolo, codice o descrizione" [value]="filtroTesto()"
     (input)="filtroTesto.set($any($event.target).value)" 
-    class="form-control mb-3 border-2 border-info border-opacity-50 bg-black text-light ::placeholder" />
+    class="form-control mb-3 border-2 border-info border-opacity-50 bg-black text-light" />
 
   <div class="row g-4">
     @for (card of corsi(); track $index) {
