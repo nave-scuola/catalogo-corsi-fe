@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DynamicCardContainerComponent } from '../../../../shared/components/dynamic-card/dynamic-card-container/dynamic-card-container.component';
 import { CorsoStore } from '../../services/corso-store';
+import { ThemeStore } from '../../theme/theme.store';
 
 @Component({
   selector: 'app-lista-corsi',
@@ -11,7 +12,8 @@ import { CorsoStore } from '../../services/corso-store';
 
 export class ListaCorsi {
   titolo = 'Catalogo Corsi';
-  service = inject(CorsoStore);  
+  service = inject(CorsoStore);
   filtroTesto = this.service.filtroTesto;
-  corsi= this.service.listaCardsFiltrati;
+  corsi = this.service.listaCardsFiltrati;
+  theme = inject(ThemeStore);
 }

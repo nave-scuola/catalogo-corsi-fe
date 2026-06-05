@@ -1,9 +1,14 @@
 <div class="container mt-4">
-  <h1 class="m-4 text-center text-info text-opacity-75">{{ titolo }}</h1>
+  <h1 class="titolo text-center">{{ titolo }}</h1>
+
+  <button class="btn mb-3" [class.btn-info]="theme.tema() === 'dark'" [class.btn-danger]="theme.tema() === 'light'"
+    (click)="theme.toggleTema()">
+    Cambia Tema
+  </button>
 
   <input type="text" placeholder="Filtra corsi tramite titolo, codice o descrizione" [value]="filtroTesto()"
-    (input)="filtroTesto.set($any($event.target).value)" 
-    class="form-control mb-3 border-2 border-info border-opacity-50 bg-black text-light" />
+    (input)="filtroTesto.set($any($event.target).value)"
+    class="form-control mb-3 border-2 bg-black text-light" />
 
   <div class="row g-4">
     @for (card of corsi(); track $index) {
