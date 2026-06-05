@@ -1,5 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { CorsoRTO } from '../models/rto/corsoRTO.model';
+import { FiltroCorsiRTO, defaultFiltroCorsi } from '../models/filtro-corsi.model/filtro-corsi.model'
 
 @Injectable({
   providedIn: 'root',
@@ -21,24 +22,9 @@ export class CorsoStore {
     }))
   );
 
-  filtroAvanzato = signal<{
-    categoria: string;
-    livello: string;
-    titolo: string;
-    codiceCorso: string;
-  }>({
-    categoria: '',
-    livello: '',
-    titolo: '',
-    codiceCorso: ''
-  });
+  filtroAvanzato = signal<FiltroCorsiRTO>(defaultFiltroCorsi());
 
-  applicaFiltroAvanzato(filtro: {
-    categoria: string;
-    livello: string;
-    titolo: string;
-    codiceCorso: string;
-  }): void {
+  applicaFiltroAvanzato(filtro: FiltroCorsiRTO): void {
     this.filtroAvanzato.set(filtro);
   }
 

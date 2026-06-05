@@ -1,5 +1,6 @@
 import { Component, inject, output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FiltroCorsiRTO, defaultFiltroCorsi } from '../../models/filtro-corsi.model/filtro-corsi.model'
 
 @Component({
   selector: 'app-filtro-corsi',
@@ -12,20 +13,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 export class FiltroCorsi {
   private fb = inject(FormBuilder);
 
-  // Output tipizzato con i campi reali del filtro
-  filtroApplicato = output<{
-    categoria: string;
-    livello: string;
-    titolo: string;
-    codiceCorso: string;
-  }>();
+  filtroApplicato = output<FiltroCorsiRTO>();
 
-  filtroForm = this.fb.nonNullable.group({
-    categoria: [''],
-    livello: [''],
-    titolo: [''],
-    codiceCorso: [''],
-  });
+  filtroForm = this.fb.nonNullable.group(defaultFiltroCorsi());
 
   onSubmit(): void {
     if (this.filtroForm.valid) {
