@@ -11,7 +11,13 @@ export class CorsoFacade {
   getById(id: number) {
     return this.store.getById(id);
   }
-  applicaFiltroAvanzato(filtro: FiltroCorsiRTO){
+  applicaFiltroAvanzato(filtro: FiltroCorsiRTO) {
     return this.store.applicaFiltroAvanzato(filtro);
   }
+
+  readonly corsi = this.store.corsi;
+  readonly loading = this.store.loading;
+  readonly errore = this.store.errore;
+
+  loadAll(): void { this.store.loadAll(); }
 }

@@ -3,6 +3,15 @@
     class="form-control mb-3 border-2 border-info border-opacity-50 bg-black text-light">
   </app-filtro-corsi>
 
+  @if (facade.loading()) {
+  <div class="text-center my-5">
+    <div class="spinner-border" role="status"></div>
+  </div>
+  } @else if (facade.errore()) {
+  <div class="alert alert-danger">{{ facade.errore() }}</div>
+  } @else if (facade.corsi().length === 0) {
+  <div class="alert alert-info">Nessun elemento trovato.</div>
+  } @else {
   <div class="row g-4">
     @for (card of corsi(); track $index) {
     <div class="col-md-6 col-sm-6 col-lg-4">
@@ -11,5 +20,6 @@
     </div>
     }
   </div>
+  }
 
 </div>

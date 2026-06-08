@@ -1,19 +1,80 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, signal, inject } from '@angular/core';
 import { CorsoRTO } from '../models/rto/corsoRTO.model';
-import { FiltroCorsiRTO, defaultFiltroCorsi } from '../models/filtro-corsi.model/filtro-corsi.model'
+import { FiltroCorsiRTO, defaultFiltroCorsi } from '../models/filtro-corsi.model/filtro-corsi.model';
+import { CorsoApi } from './corso.api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CorsoStore {
-  corsi: CorsoRTO[] = [
-    { idCorso: 1, titolo: 'Java', codiceCorso: 'JAVA', livello: 'Basso', descrizione: 'Corso Base di Java', durataOre: 900, categoria: 'Dev' },
-    { idCorso: 2, titolo: 'Angular', codiceCorso: 'ANGULAR-001', livello: 'Medio', descrizione: 'Sviluppo frontend con Angular', durataOre: 450, categoria: 'Frontend' },
-    { idCorso: 3, titolo: 'SQL Avanzato', codiceCorso: 'SQL-001', livello: 'Alto', descrizione: 'Query Avanzate e ottimizzazione', durataOre: 480, categoria: 'Database' }
-  ];
 
-  //filtro applicato al titolo, descrizione e categoria nello stesso form
+  private api = inject(CorsoApi);
+
+  private readonly _corsi = signal<CorsoRTO[]>([]);
+  readonly corsi = this._corsi.asReadonly();
+
+  private readonly _loading = signal(false);
+  readonly loading = this._loading.asReadonly();
+
+  private readonly _errore = signal<string | null>(null);
+  readonly errore = this._errore.asReadonly();
+
+  loadAll(): void {
+    this._loading.set(true);
+    this._errore.set(null);
+    this.api.getAll().subscribe({
+      next: items => { this._corsi.set(items); this._loading.set(false); },
+      error: () => { this._errore.set('Errore nel caricamento'); this._loading.set(false); }
+    });
+  }
+
+  // filtro testuale
   filtroTesto = signal<string>('');
+
+  // filtro avanzato
+  filtroAvanzato = signal<FiltroCorsiRTO>(defaultFiltroCorsi());
+
+  applicaFiltroAvanzato(filtro: FiltroCorsiRTO): void {
+    this.filtroAvanzato.set(filtro);
+  }
+
+  // normalizzazione
+  private normalize(value: string): string {
+    return value?.trim().toLowerCase() ?? '';
+  }
+
+  // match singolo corso
+  private matchCorso(corso: CorsoRTO, filtro: FiltroCorsiRTO, testo: string): boolean {
+    const t = this.normalize(testo);
+
+    const matchTesto =
+      !t ||
+      this.normalize(corso.titolo).includes(t) ||
+      this.normalize(corso.descrizione).includes(t) ||
+      this.normalize(corso.categoria).includes(t);
+
+    const matchCategoria =
+      !filtro.categoria || this.normalize(corso.categoria).includes(this.normalize(filtro.categoria));
+
+    const matchLivello =
+      !filtro.livello || this.normalize(corso.livello).includes(this.normalize(filtro.livello));
+
+    const matchTitolo =
+      !filtro.titolo || this.normalize(corso.titolo).includes(this.normalize(filtro.titolo));
+
+    const matchCodice =
+      !filtro.codiceCorso || this.normalize(corso.codiceCorso).includes(this.normalize(filtro.codiceCorso));
+
+    return matchTesto && matchCategoria && matchLivello && matchTitolo && matchCodice;
+  }
+
+  // computed finale
+  corsiFiltrati = computed(() => {
+    const testo = this.filtroTesto();
+    const filtro = this.filtroAvanzato();
+
+    return this.corsi().filter(corso => this.matchCorso(corso, filtro, testo));
+  });
 
   listaCardsFiltrati = computed(() =>
     this.corsiFiltrati().map(corso => ({
@@ -22,44 +83,25 @@ export class CorsoStore {
     }))
   );
 
-  filtroAvanzato = signal<FiltroCorsiRTO>(defaultFiltroCorsi());
-
-  applicaFiltroAvanzato(filtro: FiltroCorsiRTO): void {
-    this.filtroAvanzato.set(filtro);
-  }
-
-  corsiFiltrati = computed(() => {
-    const testo = this.filtroTesto().toLowerCase();
-    const f = this.filtroAvanzato();
-
-    return this.corsi.filter(corso => {
-
-      // filtro testuale (titolo, descrizione, categoria)
-      const matchTesto =
-        !testo ||
-        corso.titolo.toLowerCase().includes(testo) ||
-        corso.descrizione.toLowerCase().includes(testo) ||
-        corso.categoria.toLowerCase().includes(testo);
-
-      // filtro avanzato
-      const matchCategoria =
-        !f.categoria || corso.categoria.toLowerCase().includes(f.categoria.toLowerCase());
-
-      const matchLivello =
-        !f.livello || corso.livello.toLowerCase().includes(f.livello.toLowerCase());
-
-      const matchTitolo =
-        !f.titolo || corso.titolo.toLowerCase().includes(f.titolo.toLowerCase());
-
-      const matchCodice =
-        !f.codiceCorso || corso.codiceCorso.toLowerCase().includes(f.codiceCorso.toLowerCase());
-
-      return matchTesto && matchCategoria && matchLivello && matchTitolo && matchCodice;
-    });
-  });
-
   getById(id: number | string): CorsoRTO | undefined {
     const idNum = Number(id);
-    return this.corsi.find(item => item.idCorso === idNum);
+    return this.corsi().find(item => item.idCorso === idNum);
   }
+
+  findCorsoByCodCorso(codice: string): void {
+    this._loading.set(true);
+    this._errore.set(null);
+
+    this.api.findCorsoByCodCorso(codice).subscribe({
+      next: corso => {
+        this._corsi.set([corso]);
+        this._loading.set(false);
+      },
+      error: () => {
+        this._errore.set('Errore nel recupero del corso');
+        this._loading.set(false);
+      }
+    });
+  }
+
 }
