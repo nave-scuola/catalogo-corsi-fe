@@ -20,7 +20,7 @@ export class ListaCorsi {
 
   onFiltroApplicato(filtro: FiltroCorsiRTO): void {
     this.facade.applicaFiltroAvanzato(filtro);
-  }  
+  } 
   onCardClick(id: number): void {
     this.router.navigate(['/corsi', id]);
   }

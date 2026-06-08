@@ -15,17 +15,6 @@ export class CorsoStore {
   //filtro applicato al titolo, descrizione e categoria nello stesso form
   filtroTesto = signal<string>('');
 
-  corsiFiltrati = computed(() => {
-    const filtro = this.filtroTesto().toLowerCase();
-    if (!filtro) return this.corsi;
-
-    return this.corsi.filter(c =>
-      c.titolo.toLowerCase().includes(filtro) ||
-      c.descrizione.toLowerCase().includes(filtro) ||
-      c.categoria.toLowerCase().includes(filtro)
-    );
-  });
-
   listaCardsFiltrati = computed(() =>
     this.corsiFiltrati().map(corso => ({
       tipo: 'corso' as const,
