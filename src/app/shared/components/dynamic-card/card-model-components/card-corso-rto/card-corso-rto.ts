@@ -4,7 +4,8 @@ import { CorsoRTO } from '../../../../../features/catalogo-corsi/models/rto/cors
 @Component({
   selector: 'app-card-corso',
   standalone: true,
-  templateUrl: './card-corso-rto.ts.html'
+  templateUrl: './card-corso-rto.html',
+  styleUrl: './card-corso-rto.css'
 })
 export class CardCorsoComponent {
   data= input.required<CorsoRTO>();

@@ -1,0 +1,18 @@
+.card {
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.card:hover {
+  background-color: rgba(91, 197, 137, 0.543)!important;
+  color: black !important;
+  border-color: black !important;
+}
+
+.card:hover * {
+  color: black !important;
+}
+
+
+
+

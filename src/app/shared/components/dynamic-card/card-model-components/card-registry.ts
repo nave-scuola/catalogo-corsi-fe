@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { CardCorsoComponent } from './card-corso-rto/card-corso-rto.ts.js';
+import { CardCorsoComponent } from './card-corso-rto/card-corso-rto.js';
 import { CardCorsoConDocentiComponent } from './card-corso-con-docenti-rto/card-corso-con-docenti-rto.js';
 import { CardCorsoReportComponent } from './card-corso-report-rto/card-corso-report-rto.js';
 import { CardDocenteComponent } from './card-docente-rto/card-docente-rto.js';
