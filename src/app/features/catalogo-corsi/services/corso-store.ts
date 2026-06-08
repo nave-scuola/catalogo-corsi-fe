@@ -3,7 +3,7 @@ import { CorsoRTO } from '../models/rto/corsoRTO.model';
 import { FiltroCorsiRTO, defaultFiltroCorsi } from '../models/filtro-corsi.model/filtro-corsi.model'
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CorsoStore {
   corsi: CorsoRTO[] = [
@@ -14,6 +14,17 @@ export class CorsoStore {
 
   //filtro applicato al titolo, descrizione e categoria nello stesso form
   filtroTesto = signal<string>('');
+
+  corsiFiltrati = computed(() => {
+    const filtro = this.filtroTesto().toLowerCase();
+    if (!filtro) return this.corsi;
+
+    return this.corsi.filter(c =>
+      c.titolo.toLowerCase().includes(filtro) ||
+      c.descrizione.toLowerCase().includes(filtro) ||
+      c.categoria.toLowerCase().includes(filtro)
+    );
+  });
 
   listaCardsFiltrati = computed(() =>
     this.corsiFiltrati().map(corso => ({
@@ -58,7 +69,8 @@ export class CorsoStore {
     });
   });
 
-  getById(id: number): CorsoRTO | undefined {
-    return this.corsi.find(item => item.idCorso === id);
+  getById(id: number | string): CorsoRTO | undefined {
+    const idNum = Number(id);
+    return this.corsi.find(item => item.idCorso === idNum);
   }
 }

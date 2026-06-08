@@ -3,6 +3,7 @@ import { DynamicCardContainerComponent } from '../../../../shared/components/dyn
 import { FiltroCorsi } from '../../components/filtro-corsi/filtro-corsi';
 import { FiltroCorsiRTO } from '../../models/filtro-corsi.model/filtro-corsi.model';
 import { CorsoFacade } from '../../services/corso-facade';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-lista-corsi',
@@ -12,12 +13,15 @@ import { CorsoFacade } from '../../services/corso-facade';
 })
 
 export class ListaCorsi {
-  titolo = 'Catalogo Corsi';
-  facade = inject(CorsoFacade);  
+  facade = inject(CorsoFacade);
+  router = inject(Router);
   filtroTesto = this.facade.filtroTesto;
   corsi= this.facade.listaCardsFiltrati;
 
   onFiltroApplicato(filtro: FiltroCorsiRTO): void {
     this.facade.applicaFiltroAvanzato(filtro);
+  }  
+  onCardClick(id: number): void {
+    this.router.navigate(['/corsi', id]);
   }
 }
