@@ -4,9 +4,9 @@
 }
 
 .card:hover {
-  background-color: rgba(91, 197, 137, 0.543)!important;
+  background-color: rgba(199, 249, 255, 0.377)!important;
   color: black !important;
-  border-color: black !important;
+  border-color: rgba(30, 255, 255, 0.696) !important;
 }
 
 .card:hover * {
