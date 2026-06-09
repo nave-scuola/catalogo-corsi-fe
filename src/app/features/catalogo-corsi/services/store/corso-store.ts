@@ -1,6 +1,6 @@
 import { Injectable, signal, inject } from '@angular/core';
-import { CorsoRTO } from '../models/rto/corsoRTO.model';
-import { CorsoApi } from './corso.api';
+import { CorsoRTO } from '../../models/rto/corsoRTO.model';
+import { CorsoApi } from '../api/corso.api';
 
 @Injectable({ providedIn: 'root' })
 export class CorsoStore {

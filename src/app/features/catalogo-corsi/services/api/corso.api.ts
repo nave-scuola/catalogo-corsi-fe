@@ -1,9 +1,9 @@
 // features/catalogo-corsi/services/corso.api.ts
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
-import { CorsoRTO } from '../models/rto/corsoRTO.model';
+import { CorsoRTO } from '../../models/rto/corsoRTO.model';
 
 @Injectable({ providedIn: 'root' })
 export class CorsoApi {

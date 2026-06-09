@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DynamicCardContainerComponent } from '../../../../shared/components/dynamic-card/dynamic-card-container/dynamic-card-container.component';
-import { CorsoFacade } from '../../services/corso-facade';
+import { CorsoFacade } from '../../services/facade/corso-facade';
 import { Router } from '@angular/router';
 
 @Component({

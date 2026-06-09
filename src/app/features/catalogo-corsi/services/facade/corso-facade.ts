@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { CorsoStore } from './corso-store';
+import { CorsoStore } from '../store/corso-store';
 
 @Injectable({ providedIn: 'root' })
 export class CorsoFacade {

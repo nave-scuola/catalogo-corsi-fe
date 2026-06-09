@@ -14,5 +14,23 @@ export class TasksHub {
     this.router.navigate(['/docenti/ex01']);
   }
 
-  // Qui aggiungeremo EX02, EX03, EX04, ecc.
+  goToEX02() {
+    this.router.navigate(['/corsi/ex02']);
+  }
+
+  goToEX03() {
+    this.router.navigate(['/docenti/ex03']);
+  }
+
+  goToEX04() {
+    this.router.navigate(['/docenti/ex04']);
+  }
+
+  goToEX05() {
+    this.router.navigate(['/docenti/ex05']);
+  }
+
+  goToEX06() {
+    this.router.navigate(['/docenti/ex06']);
+  }
 }

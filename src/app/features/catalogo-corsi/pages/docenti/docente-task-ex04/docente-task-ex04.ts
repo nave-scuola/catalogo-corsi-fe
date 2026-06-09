@@ -1,20 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { DocenteFacade } from '../../services/docente-facade';
-import { DynamicCardContainerComponent } from '../../../../shared/components/dynamic-card/dynamic-card-container/dynamic-card-container.component';
+import { DocenteFacade } from '../../../services/facade/docente-facade';
+import { DynamicCardContainerComponent } from '../../../../../shared/components/dynamic-card/dynamic-card-container/dynamic-card-container.component';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-docente-task-ex01',
+  selector: 'app-docente-task-ex04',
   standalone: true,
   imports: [ReactiveFormsModule, DynamicCardContainerComponent],
-  templateUrl: './docente-task-ex01.html',
-  styleUrl: './docente-task-ex01.css'
+  templateUrl: './docente-task-ex04.html'
 })
-export class DocenteCorsiEx01Page {
+export class DocenteTaskEx04 {
   private fb = inject(FormBuilder);
+  private router = inject(Router);
   facade = inject(DocenteFacade);
-  router = inject(Router);
 
   form = this.fb.nonNullable.group({
     idDocente: 0
@@ -23,7 +22,7 @@ export class DocenteCorsiEx01Page {
   onSubmit(): void {
     const id = this.form.value.idDocente;
     if (!id || id <= 0) return;
-    this.facade.loadCorsiByIdDocente(id);
+    this.facade.loadDocenteById(id);
   }
 
   goBack() {

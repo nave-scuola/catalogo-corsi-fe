@@ -1,0 +1,57 @@
+<div class="container mt-4">
+
+  <button class="btn btn-secondary mb-3" (click)="goBack()">
+    ⬅ Indietro
+  </button>
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="card p-3 bg-dark text-light border-info border-2">
+
+    <label class="form-label" for="nome">Nome</label>
+    <input
+      id="nome"
+      name="nome"
+      class="form-control mb-3"
+      formControlName="nome"
+      autocomplete="off"
+    />
+
+    <label class="form-label" for="cognome">Cognome</label>
+    <input
+      id="cognome"
+      name="cognome"
+      class="form-control mb-3"
+      formControlName="cognome"
+      autocomplete="off"
+    />
+
+    <button class="btn btn-info w-100" type="submit">
+      Cerca docenti (Task EX06)
+    </button>
+  </form>
+
+  @if (facade.loading()) {
+    <div class="text-center mt-4">
+      <div class="spinner-border"></div>
+    </div>
+  }
+
+  @if (facade.errore()) {
+    <div class="alert alert-danger mt-3">{{ facade.errore() }}</div>
+  }
+
+  @if (facade.docentiByNomeCognome().length > 0) {
+    <div class="row g-4 mt-4">
+      @for (docente of facade.docentiByNomeCognome(); track $index) {
+        <div class="col-md-6 col-sm-6 col-lg-4">
+          <app-dynamic-card-container
+            [data]="{ tipo: 'docenteConCorsi', payload: docente }">
+          </app-dynamic-card-container>
+        </div>
+      }
+    </div>
+  }
+
+</div>

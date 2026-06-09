@@ -1,5 +1,5 @@
 import { Component, input, inject, computed } from '@angular/core';
-import { CorsoFacade } from '../../services/corso-facade';
+import { CorsoFacade } from '../../services/facade/corso-facade';
 
 @Component({
   selector: 'app-dettaglio-corso',
