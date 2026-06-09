@@ -39,7 +39,7 @@ export class DocenteApi {
 
   // ex05
   getDocentiByListaId(listaId: number[]): Observable<DocenteConCorsiRTO[]> {
-    const params = listaId.map(id => `Lista ID=${id}`).join('&');
+    const params = listaId.map(id => `Lista-ID=${id}`).join('&');
     return this.http.get<DocenteConCorsiRTO[]>(
       `${this.baseUrl}/docenti/lista-id?${params}`
     );
