@@ -1,0 +1,35 @@
+<div class="container mt-4">
+
+    <button class="btn btn-secondary mb-3" (click)="goBack()">
+        ⬅ Indietro
+    </button>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-3 bg-dark text-light border-info border-2">
+
+        <label class="form-label" for="idDocente">ID Docente</label>
+        <input id="idDocente" name="idDocente" type="number" class="form-control mb-3" formControlName="idDocente"
+            autocomplete="off" />
+
+        <button class="btn btn-info w-100" type="submit">
+            Carica docente (Task EX04)
+        </button>
+    </form>
+
+    @if (facade.loading()) {
+    <div class="text-center mt-4">
+        <div class="spinner-border"></div>
+    </div>
+    }
+
+    @if (facade.errore()) {
+    <div class="alert alert-danger mt-3">{{ facade.errore() }}</div>
+    }
+
+    @if (facade.docenteDettaglio()) {
+    <div class="mt-4">
+        <app-dynamic-card-container [data]="{ tipo: 'docenteConCorsi', payload: facade.docenteDettaglio()! }">
+        </app-dynamic-card-container>
+    </div>
+    }
+
+</div>

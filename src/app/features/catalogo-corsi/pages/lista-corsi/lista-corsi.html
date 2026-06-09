@@ -1,15 +1,24 @@
 <div class="container mt-4">
-  <h1 class="m-4 text-center text-info text-opacity-75">Catalogo Corsi</h1>
-  <app-filtro-corsi (filtroApplicato)="onFiltroApplicato($event)"
-  class="form-control mb-3 border-2 border-info border-opacity-50 bg-black text-light">
-  </app-filtro-corsi>
 
-  <div class="row g-4">
-    @for (card of corsi(); track $index) {
-    <div class="col-md-6 col-sm-6 col-lg-4">
-      <app-dynamic-card-container [data]="card" (click)="onCardClick(card.payload.idCorso)"></app-dynamic-card-container>
+  @if (facade.loading()) {
+    <div class="text-center my-5">
+      <div class="spinner-border" role="status"></div>
     </div>
-    }
-  </div>
+  } @else if (facade.errore()) {
+    <div class="alert alert-danger">{{ facade.errore() }}</div>
+  } @else if (facade.corsi().length === 0) {
+    <div class="alert alert-info">Nessun elemento trovato.</div>
+  } @else {
+    <div class="row g-4">
+      @for (corso of corsi(); track $index) {
+        <div class="col-md-6 col-sm-6 col-lg-4">
+          <app-dynamic-card-container
+            [data]="{ tipo: 'corso', payload: corso }"
+            (click)="onCardClick(corso.idCorso)">
+          </app-dynamic-card-container>
+        </div>
+      }
+    </div>
+  }
 
 </div>
