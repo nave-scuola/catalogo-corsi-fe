@@ -1,16 +1,16 @@
-<router-outlet>
-  @if (loadingService.isLoading()) {
-  <div class="progress" style="height: 3px;">
-    <div class="progress-bar progress-bar-striped progress-bar-animated w-100"></div>
-  </div>
-  }
+@if (loadingService.isLoading()) {
+<div class="progress" style="height: 3px;">
+  <div class="progress-bar progress-bar-striped progress-bar-animated w-100"></div>
+</div>
+}
 
-  @if (errorStore.errore()) {
-  <div class="alert alert-danger alert-dismissible m-3">
-    {{ errorStore.errore() }}
-    <button type="button" class="btn-close" (click)="errorStore.clear()"></button>
-  </div>
-  }
+@if (errorStore.errore()) {
+<div class="alert alert-danger alert-dismissible m-3">
+  {{ errorStore.errore() }}
+  <button type="button" class="btn-close" (click)="errorStore.clear()"></button>
+</div>
+}
+<router-outlet>
   <nav class="navbar navbar-dark bg-dark mb-4">
     <div class="container">
       <a class="navbar-brand text-info text-opacity-75" routerLink="/corsi">Catalogo Corsi</a>
