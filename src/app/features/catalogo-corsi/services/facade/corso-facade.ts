@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { CorsoStore } from '../store/corso-store';
+import { CorsoTO } from '../../models/to/corsoTO.model';
 
 @Injectable({ providedIn: 'root' })
 export class CorsoFacade {
@@ -16,12 +17,12 @@ export class CorsoFacade {
     this.store.loadCorso(id);
   }
 
-  creaCorso(rto: any) {
-    return this.store.creaCorso(rto);
+  creaCorso(to: CorsoTO) {
+    return this.store.creaCorso(to);
   }
 
-  modificaCorso(rto: any) {
-    return this.store.modificaCorso(rto);
+  modificaCorso(to: CorsoTO) {
+    return this.store.modificaCorso(to);
   }
 
   eliminaCorso(id: number) {

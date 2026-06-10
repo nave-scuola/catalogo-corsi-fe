@@ -1,6 +1,7 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { CorsoRTO } from '../../models/rto/corsoRTO.model';
 import { CorsoApi } from '../api/corso.api';
+import { CorsoTO } from '../../models/to/corsoTO.model';
 
 @Injectable({ providedIn: 'root' })
 export class CorsoStore {
@@ -32,14 +33,14 @@ export class CorsoStore {
     this.api.getCorsoById(id).subscribe(c => this._corso.set(c));
   }
 
-  creaCorso(rto: Omit<CorsoRTO, 'idCorso'>) {
-    return this.api.creaCorso(rto);
+
+  creaCorso(to: CorsoTO) {
+    return this.api.creaCorso(to);
   }
 
-  modificaCorso(rto: CorsoRTO) {
-    return this.api.modificaCorso(rto);
+  modificaCorso(to: CorsoTO) {
+    return this.api.modificaCorso(to);
   }
-
   eliminaCorso(id: number) {
     return this.api.eliminaCorso(id);
   }

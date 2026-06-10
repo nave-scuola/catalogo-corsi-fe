@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { CorsoRTO } from '../../models/rto/corsoRTO.model';
+import { CorsoTO } from '../../models/to/corsoTO.model';
 
 @Injectable({ providedIn: 'root' })
 export class CorsoApi {
@@ -22,18 +23,12 @@ export class CorsoApi {
         return this.http.get<CorsoRTO>(`${this.baseUrl}/corsi/corso/${idCorso}`);
     }
 
-    creaCorso(dto: Omit<CorsoRTO, 'idCorso'>) {
-        const params = new URLSearchParams();
-        Object.entries(dto).forEach(([k, v]) => params.append(k, v.toString()));
-
-        return this.http.post<void>(`${this.baseUrl}?${params.toString()}`, null);
+    creaCorso(to: CorsoTO): Observable<void> {
+        return this.http.post<void>(`${this.baseUrl}/corsi`, to);
     }
 
-    modificaCorso(dto: CorsoRTO) {
-        const params = new URLSearchParams();
-        Object.entries(dto).forEach(([k, v]) => params.append(k, v.toString()));
-
-        return this.http.put<void>(`${this.baseUrl}/corsi/modifica-corso?${params.toString()}`, null);
+    modificaCorso(to: CorsoTO): Observable<void> {
+        return this.http.put<void>(`${this.baseUrl}/corsi/modifica-corso`, to);
     }
 
     eliminaCorso(idCorso: number) {
