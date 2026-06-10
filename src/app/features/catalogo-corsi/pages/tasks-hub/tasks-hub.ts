@@ -38,4 +38,8 @@ export class TasksHub {
     this.router.navigate(['/corsi/fe404']);
   }
 
+  goToFe403() {
+    this.router.navigate(['/corsi/fe403']);
+  }
+
 }

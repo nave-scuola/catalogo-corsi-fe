@@ -13,12 +13,13 @@ export class CorsoApi {
     getAll(): Observable<CorsoRTO[]> {
         return this.http.get<CorsoRTO[]>(`${this.baseUrl}/corsi`);
     }
+
     findCorsoByCodCorso(codice: string): Observable<CorsoRTO> {
         return this.http.get<CorsoRTO>(`${this.baseUrl}/catalogo-corsi/corsi/${codice}`);
     }
 
     getCorsoById(idCorso: number) {
-        return this.http.get<CorsoRTO>(`${this.baseUrl}/corso/${idCorso}`);
+        return this.http.get<CorsoRTO>(`${this.baseUrl}/corsi/corso/${idCorso}`);
     }
 
     creaCorso(dto: Omit<CorsoRTO, 'idCorso'>) {
@@ -33,5 +34,9 @@ export class CorsoApi {
         Object.entries(dto).forEach(([k, v]) => params.append(k, v.toString()));
 
         return this.http.put<void>(`${this.baseUrl}/corsi/modifica-corso?${params.toString()}`, null);
+    }
+
+    eliminaCorso(idCorso: number) {
+        return this.http.delete<void>(`${this.baseUrl}/corsi/${idCorso}`);
     }
 }

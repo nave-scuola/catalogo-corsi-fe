@@ -12,10 +12,6 @@ export class CorsoFacade {
 
   loadAll(): void { this.store.loadAll(); }
 
-  getById(id: number) {
-    return this.store.getById(id);
-  }
-
   loadCorso(id: number) {
     this.store.loadCorso(id);
   }
@@ -26,5 +22,9 @@ export class CorsoFacade {
 
   modificaCorso(rto: any) {
     return this.store.modificaCorso(rto);
+  }
+
+  eliminaCorso(id: number) {
+    return this.store.eliminaCorso(id);
   }
 }

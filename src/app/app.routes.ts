@@ -44,6 +44,12 @@ export const routes: Routes = [
         .then(m => m.CorsoTaskFe404)
   },
   {
+    path: 'corsi/fe403',
+    loadComponent: () =>
+      import('./features/catalogo-corsi/pages/corsi/corso-task-fe403/corso-task-fe403')
+        .then(m => m.CorsoTaskFe403)
+  },
+  {
     path: 'tasks',
     loadComponent: () =>
       import('./features/catalogo-corsi/pages/tasks-hub/tasks-hub')

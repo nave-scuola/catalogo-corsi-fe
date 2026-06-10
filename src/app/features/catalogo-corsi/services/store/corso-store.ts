@@ -25,14 +25,9 @@ export class CorsoStore {
     });
   }
 
-  getById(id: number | string): CorsoRTO | undefined {
-    const idNum = Number(id);
-    return this.corsi().find(item => item.idCorso === idNum);
-  }
-
   private readonly _corso = signal<CorsoRTO | null>(null);
   readonly corso = this._corso.asReadonly();
-  
+
   loadCorso(id: number) {
     this.api.getCorsoById(id).subscribe(c => this._corso.set(c));
   }
@@ -43,5 +38,9 @@ export class CorsoStore {
 
   modificaCorso(rto: CorsoRTO) {
     return this.api.modificaCorso(rto);
+  }
+
+  eliminaCorso(id: number) {
+    return this.api.eliminaCorso(id);
   }
 }

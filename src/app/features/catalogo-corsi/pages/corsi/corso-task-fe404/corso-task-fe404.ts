@@ -25,22 +25,6 @@ export class CorsoTaskFe404 {
     categoria: ''
   });
 
-  constructor() {
-    effect(() => {
-      const corso = this.facade.corso();
-      if (corso) {
-        this.form.patchValue(corso);
-      }
-    });
-  }
-
-  loadCorso() {
-    const id = this.form.value.idCorso!;
-    if (id > 0) {
-      this.facade.loadCorso(id);
-    }
-  }
-
   crea() {
     const { idCorso, ...rto } = this.form.getRawValue();
     this.facade.creaCorso(rto).subscribe(() => alert('Corso creato!'));
