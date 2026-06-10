@@ -1,0 +1,4 @@
+.bg-grey {
+  --bs-bg-opacity: 1;
+  background-color:rgba(183, 183, 183, 0.358) !important;
+}

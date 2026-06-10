@@ -33,4 +33,13 @@ export class TasksHub {
   goToEX06() {
     this.router.navigate(['/docenti/ex06']);
   }
+
+  goToCorsiFe404() {
+    this.router.navigate(['/corsi/fe404']);
+  }
+
+  goToFe403() {
+    this.router.navigate(['/corsi/fe403']);
+  }
+
 }

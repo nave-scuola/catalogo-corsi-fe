@@ -15,7 +15,7 @@ import { DynamicCardRequest } from '../../../../features/catalogo-corsi/models/r
   templateUrl: './dynamic-card-container.component.html'
 })
 export class DynamicCardContainerComponent implements OnChanges {
-  data= input.required<DynamicCardRequest>();
+  data = input.required<DynamicCardRequest>();
 
   @ViewChild('vc', { read: ViewContainerRef, static: true })
   vc!: ViewContainerRef;
@@ -24,36 +24,36 @@ export class DynamicCardContainerComponent implements OnChanges {
     this.loadCard();
   }
 
-private loadCard() {
-  this.vc.clear();
+  private loadCard() {
+    this.vc.clear();
 
-  const comp = CARD_REGISTRY[this.data().tipo];
-  if (!comp) {
-    console.error('Tipo card non supportato:', this.data().tipo);
-    return;
+    const comp = CARD_REGISTRY[this.data().tipo];
+    if (!comp) {
+      console.error('Tipo card non supportato:', this.data().tipo);
+      return;
+    }
+
+    const componentRef = this.vc.createComponent(comp);
+    componentRef.setInput('data', this.data().payload);
+
+    const element = componentRef.location.nativeElement;
+
+    // TYPE GUARD
+    const payload = this.data().payload;
+
+    let path = '';
+
+    if (this.data().tipo === 'corso' && 'idCorso' in payload) {
+      path = `/corsi/${payload.idCorso}`;
+    }
+    else if (this.data().tipo === 'docente' && 'idDocente' in payload) {
+      path = `/docenti/${payload.idDocente}`;
+    }
+    else {
+      path = `/${this.data().tipo}`;
+    }
+
+    element.setAttribute('title', path);
   }
-
-  const componentRef = this.vc.createComponent(comp);
-  componentRef.setInput('data', this.data().payload);
-
-  const element = componentRef.location.nativeElement;
-
-  // TYPE GUARD
-  const payload = this.data().payload;
-
-  let path = '';
-
-  if (this.data().tipo === 'corso' && 'idCorso' in payload) {
-    path = `/corsi/${payload.idCorso}`;
-  }
-  else if (this.data().tipo === 'docente' && 'idDocente' in payload) {
-    path = `/docenti/${payload.idDocente}`;
-  }
-  else {
-    path = `/${this.data().tipo}`;
-  }
-
-  element.setAttribute('title', path);
-}
 
 }

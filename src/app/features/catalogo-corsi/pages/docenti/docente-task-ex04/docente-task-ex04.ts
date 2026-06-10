@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
   selector: 'app-docente-task-ex04',
   standalone: true,
   imports: [ReactiveFormsModule, DynamicCardContainerComponent],
-  templateUrl: './docente-task-ex04.html'
+  templateUrl: './docente-task-ex04.html',
+  styleUrl: './docente-task-ex04.css'
 })
 export class DocenteTaskEx04 {
   private fb = inject(FormBuilder);

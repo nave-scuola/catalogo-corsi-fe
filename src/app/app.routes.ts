@@ -38,10 +38,16 @@ export const routes: Routes = [
         .then(m => m.DocenteTaskEx06)
   },
   {
-    path: 'corsi',
-    loadChildren: () =>
-      import('./features/catalogo-corsi/catalogo-corsi.routes')
-        .then(m => m.CATALOGO_CORSI_ROUTES)
+    path: 'corsi/fe404',
+    loadComponent: () =>
+      import('./features/catalogo-corsi/pages/corsi/corso-task-fe404/corso-task-fe404')
+        .then(m => m.CorsoTaskFe404)
+  },
+  {
+    path: 'corsi/fe403',
+    loadComponent: () =>
+      import('./features/catalogo-corsi/pages/corsi/corso-task-fe403/corso-task-fe403')
+        .then(m => m.CorsoTaskFe403)
   },
   {
     path: 'tasks',

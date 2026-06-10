@@ -1,0 +1,30 @@
+<div class="container mt-4">
+
+  <button class="btn btn-secondary mb-3" (click)="goBack()">
+    ⬅ Indietro
+  </button>
+
+  <h2 class="text-info mb-3">FE403 – Ricerca Corso per ID</h2>
+
+  <form [formGroup]="form" (ngSubmit)="loadCorso()" class="card p-3 bg-grey text-light border-info border-2">
+
+    <label>ID Corso</label>
+    <input type="number" formControlName="idCorso" class="form-control mb-3 form-control
+      border-info border-opacity-50 bg-dark bg-opacity-75 text-light">
+
+    <button class="btn btn-outline-info" type="submit">
+      Cerca Corso
+    </button>
+  </form>
+
+  @let c = corso();
+  @if (c) {
+  <div class="row g-4 mt-4">
+    <div class="col-md-6 col-sm-6 col-lg-4">
+      <app-dynamic-card-container [data]="{ tipo: 'corso', payload: c }">
+      </app-dynamic-card-container>
+    </div>
+  </div>
+  }
+
+</div>

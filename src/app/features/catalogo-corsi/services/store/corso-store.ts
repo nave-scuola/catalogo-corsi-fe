@@ -1,6 +1,7 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { CorsoRTO } from '../../models/rto/corsoRTO.model';
 import { CorsoApi } from '../api/corso.api';
+import { CorsoTO } from '../../models/to/corsoTO.model';
 
 @Injectable({ providedIn: 'root' })
 export class CorsoStore {
@@ -25,8 +26,22 @@ export class CorsoStore {
     });
   }
 
-  getById(id: number | string): CorsoRTO | undefined {
-    const idNum = Number(id);
-    return this.corsi().find(item => item.idCorso === idNum);
+  private readonly _corso = signal<CorsoRTO | null>(null);
+  readonly corso = this._corso.asReadonly();
+
+  loadCorso(id: number) {
+    this.api.getCorsoById(id).subscribe(c => this._corso.set(c));
+  }
+
+
+  creaCorso(to: CorsoTO) {
+    return this.api.creaCorso(to);
+  }
+
+  modificaCorso(to: CorsoTO) {
+    return this.api.modificaCorso(to);
+  }
+  eliminaCorso(id: number) {
+    return this.api.eliminaCorso(id);
   }
 }

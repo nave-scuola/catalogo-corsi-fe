@@ -7,14 +7,15 @@
   <form
     [formGroup]="form"
     (ngSubmit)="onSubmit()"
-    class="card p-3 bg-dark text-light border-info border-2">
+    class="card p-3 bg-grey text-light border-info border-2">
 
     <label class="form-label" for="idDocente">ID Docente</label>
     <input
       id="idDocente"
       name="idDocente"
       type="number"
-      class="form-control mb-3"
+      class="form-control mb-3 form-control
+      border-info border-opacity-50 bg-dark bg-opacity-75 text-light"
       formControlName="idDocente"
       autocomplete="off"
     />
