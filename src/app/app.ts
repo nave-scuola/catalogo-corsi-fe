@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { LoadingService } from './core/loading.service';
+import { ErrorStore } from './features/catalogo-corsi/services/store/error-store';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +10,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
+  loadingService= inject(LoadingService);
+  errorStore= inject(ErrorStore);
   title = 'catalogo-corsi-fe';
 }

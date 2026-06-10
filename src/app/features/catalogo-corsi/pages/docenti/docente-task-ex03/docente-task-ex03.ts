@@ -13,10 +13,6 @@ export class DocenteTaskEx03 {
   private router = inject(Router);
   facade = inject(DocenteFacade);
 
-  constructor() {
-    this.facade.loadAllDocenti();
-  }
-
   goBack() {
     this.router.navigate(['/tasks']);
   }
