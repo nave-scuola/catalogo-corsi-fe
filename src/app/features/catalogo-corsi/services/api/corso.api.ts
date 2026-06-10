@@ -16,4 +16,22 @@ export class CorsoApi {
     findCorsoByCodCorso(codice: string): Observable<CorsoRTO> {
         return this.http.get<CorsoRTO>(`${this.baseUrl}/catalogo-corsi/corsi/${codice}`);
     }
+
+    getCorsoById(idCorso: number) {
+        return this.http.get<CorsoRTO>(`${this.baseUrl}/corso/${idCorso}`);
+    }
+
+    creaCorso(dto: Omit<CorsoRTO, 'idCorso'>) {
+        const params = new URLSearchParams();
+        Object.entries(dto).forEach(([k, v]) => params.append(k, v.toString()));
+
+        return this.http.post<void>(`${this.baseUrl}?${params.toString()}`, null);
+    }
+
+    modificaCorso(dto: CorsoRTO) {
+        const params = new URLSearchParams();
+        Object.entries(dto).forEach(([k, v]) => params.append(k, v.toString()));
+
+        return this.http.put<void>(`${this.baseUrl}/corsi/modifica-corso?${params.toString()}`, null);
+    }
 }

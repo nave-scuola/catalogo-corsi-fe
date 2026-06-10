@@ -1,0 +1,46 @@
+<div class="container mt-4">
+
+  <button class="btn btn-secondary mb-3" (click)="goBack()">
+    ⬅ Indietro
+  </button>
+
+  <h2 class="text-info mb-3">FE404 – Gestione Corso (Create / Update)</h2>
+
+  <form [formGroup]="form" class="card p-3 bg-grey text-light border-info">
+
+    <label>ID Corso (solo per modifica)</label>
+    <input type="number" formControlName="idCorso" class="form-control mb-3 form-control
+    border-info border-opacity-50 bg-dark bg-opacity-75 text-light">
+
+    <label>Titolo</label>
+    <input formControlName="titolo" class="form-control mb-3 form-control 
+    border-info border-opacity-50 bg-dark bg-opacity-75 text-light">
+
+    <label>Codice Corso</label>
+    <input formControlName="codiceCorso" class="form-control mb-3 form-control
+    border-info border-opacity-50 bg-dark bg-opacity-75 text-light">
+
+    <label>Livello</label>
+    <input formControlName="livello" class="form-control mb-3 form-control
+    border-info border-opacity-50 bg-dark bg-opacity-75 text-light">
+
+    <label>Descrizione</label>
+    <textarea formControlName="descrizione" class="form-control mb-3 form-control
+    border-info border-opacity-50 bg-dark bg-opacity-75 text-light"></textarea>
+
+    <label>Durata Ore</label>
+    <input type="number" formControlName="durataOre" class="form-control mb-3 form-control
+    border-info border-opacity-50 bg-dark bg-opacity-75 text-light">
+
+    <label>Categoria</label>
+    <input formControlName="categoria" class="form-control mb-3 form-control
+    border-info border-opacity-50 bg-dark bg-opacity-75 text-light">
+
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary btn-dark btn-outline-info" type="button" (click)="crea()">Crea Nuovo</button>
+      <button class="btn btn-outline-secondary ms-2" type="button" (click)="modifica()">Modifica</button>
+    </div>
+
+  </form>
+
+</div>

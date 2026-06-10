@@ -29,4 +29,19 @@ export class CorsoStore {
     const idNum = Number(id);
     return this.corsi().find(item => item.idCorso === idNum);
   }
+
+  private readonly _corso = signal<CorsoRTO | null>(null);
+  readonly corso = this._corso.asReadonly();
+  
+  loadCorso(id: number) {
+    this.api.getCorsoById(id).subscribe(c => this._corso.set(c));
+  }
+
+  creaCorso(rto: Omit<CorsoRTO, 'idCorso'>) {
+    return this.api.creaCorso(rto);
+  }
+
+  modificaCorso(rto: CorsoRTO) {
+    return this.api.modificaCorso(rto);
+  }
 }
