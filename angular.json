@@ -107,6 +107,9 @@
             },
             "development": {
               "buildTarget": "catalogo-corsi-fe:build:development"
+            },
+            "github": {
+              "buildTarget": "catalogo-corsi-fe:build:github"
             }
           },
           "defaultConfiguration": "development"
